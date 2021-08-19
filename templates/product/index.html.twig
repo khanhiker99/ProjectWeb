@@ -1,0 +1,69 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Product List {% endblock %}
+
+{% block body %}
+<style>
+    body {
+        width: 80%;
+        margin: 20px auto;
+    }
+</style>
+ 
+<div class="container-fluid">
+    <div class="container">
+        {% for flash in app.flashes("Info") %}
+            <p class="alert alert-success"> {{ flash }}
+        {% endfor %}
+        {% for flash in app.flashes("Error") %}
+            <p class="alert alert-danger"> {{ flash }}
+        {% endfor %}
+    </div>
+    <a class="btn btn-outline-success" href="{{ path ('product_create') }}">Create new Product</a>
+    
+     <a class="btn btn-secondary" href="{{ path ('home_user') }}">Back to home</a>
+    <br><br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Hình ảnh</th>                
+                <th scope="col">Category</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td scope="row"> {{ product.id }} </td>
+                <td scope="row"> {{ product.name }} </td>
+                <td scope="row"> {{ product.information }} </td>
+                <td scope="row"> 
+                    {% if product.picture == null %}
+                         <img src="{{ asset ('img/Toy/Gundam.png')}}" width="80px" height="80px"> 
+                    {% else %}    
+                         <img src="{{ asset ('img/Toy/' ~ product.picture)}}" width= "80px" height= "80px" />
+                    {% endif %}  
+                </td>        
+                  
+                <td scope="row">
+                    <a class="btn btn-outline-success" style="width: 120px" href="{{ path ('category_detail', {'id' : product.category.id} ) }} "> {{ product.category.name }} </a>
+                </td>
+                        
+                
+                <td>
+                    <a class="btn btn-success" href="{{ path ('product_detail', {'id' : product.id} )}}">Detail</a>   
+                    <a class="btn btn-warning" href="{{ path ('product_update', {'id' : product.id} )}}">Update</a>
+                    <a class="btn btn-danger" href="{{ path ('product_delete', {'id' : product.id} )}}"
+                                              onclick= "return confirm('Are you sure to delete ?')">
+                    Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

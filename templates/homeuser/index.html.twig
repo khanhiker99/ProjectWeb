@@ -1,0 +1,525 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+
+<style>
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.layout-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Home Page</title>
+<meta http-equiv="content-type" content="text/html;charset=iso-8859-2" />
+<link rel="stylesheet" href="stylesheet.css" type="text/css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="{{ asset ('js/home.js')}}"></script>
+</head>
+<body>
+<div id="content">
+  <div id="header">
+    <div class="topong">
+          <div class="image mt-xxl-4">
+        {% set image = 'cart.png' %}
+        <img src="{{ asset('img/' ~ image) }}" width='20%' height='20%'>
+         <h4><a href="{{ path ('cart_index') }}">VIEW CART</a></h4>      
+         
+    </div>     
+    </div>
+    <div class="topong">
+      <div class="pad">
+        <span class="txt"></span> </div>
+    </div>
+    <a href="{{ path ('home')}}">
+      <h1><span class="green bigl">S</span>hopping<span class="green bigl">I</span>ker</h1>
+    </a>
+    <span class="slogan">You can buy all everythings here</span> </div>
+  <div id="menu">
+    <div class="pad">
+      <div id="search">
+        <form action="/home/user" method="get">
+          <p>
+            <input type="text" color="white" class="form"name="name" size="10px" maxlength="250" class="text" value=""  />
+            <input type="submit" value="SEARCH" class="txt" />
+          </p>
+        </form>
+      </div>
+      <div class="submit">
+        <ul>
+          {# <li><a href="#"><span>HOME</span></a></li> #}
+          <li><a href="{{ path ('home_user1')}}"><span> All</span></a></li>
+          <div >
+               {% for category in category %}
+            <tr>              
+                <a scope="row" style=""  href="{{ path ('home_user' , {'id' : category.id })}} ">  {{ category.name }} </a>
+            </tr>
+               {% endfor %}
+          </div>          
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+      
+        <div class="container-fluid">
+          <div class="row">
+            {% for product in products %}
+                <div class="col-sm-3">
+                    <div class="description">
+                      <div > <h4> {{ product.name }} </h4> </div>
+                      <div > 
+                          <h4> {{ product.information }} $ </h4> 
+
+                      </div>
+                            <div>                                
+                              <tr>              
+                                  <a scope="row" class="btn btn-outline-success" style="width: 120px" href="{{ path ('home_user' , {'id' : product.category.id })}} ">  {{ product.category.name }} </a>
+                              </tr>                               
+                          </div>  
+
+                      <div class="img mt-2">   
+                        <div class="">  
+                          <div class="w3-card">      
+                            <td scope="row"> 
+                                {% if product.picture == null %}
+                                    <img src="{{ asset ('img/Toy/Gundam.png')}}" width="120px" height="120px" /> 
+                                {% else %}    
+                                    <img src="{{ asset ('img/Toy/' ~ product.picture)}}" width= "120px" height= "120px" />
+                                {% endif %}  
+                            </td>    
+                          </div>
+                        </div>                   
+                      </div>
+
+                      <div >
+                          <a class="btn btn-success mt-2 " style="width: 120px"  href="{{ path ('product_detail', {'id' : product.id} )}}">Detail</a>   
+                          <button class="btn btn-warning mt-2" style="width: 120px" onclick="addProduct('{{ product.id }}', '{{ product.name }}', '{{ product.information }}', '{{ product.picture }}' )"> Add to cart </button> 
+                      </div>
+                    </div>
+                </div>
+            {% endfor %}
+          </div>
+        </div>
+ 
+  <div id="footer">
+    <p class="right">Copyright &copy; 2006 Your Company, Design: <a href="http://www.free-css-templates.com">free-css-templates.com</a></p>
+    <p><a href="#">Home</a> &middot; <a href="#">Contact</a> &middot; <a href="#">Accessibility</a> &middot; <a href="#">Products</a> &middot; <a href="#">Disclaimer</a> &middot; <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> and <a href="http://validator.w3.org/check?uri=referer">XHTML</a><br />
+    </p>
+  </div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+<style>
+    /*
+	Template ID 2 - Stylesheet
+	http://www.layoutica.com
+	
+*/
+
+* {
+padding : 0;
+margin : 0;
+}
+body {
+background : #fafafa;
+font-family : Tahoma, Verdana, Arial, sans-serif;
+font-size : 8pt;
+color : #585858;
+}
+.rs { float: right; margin: 0 10px; border: 1px solid #ddd; padding: 5px; background: #f5f5f5  }
+ul { list-style-position: inside; margin-left: 2px }
+ul li { list-style-type: square; margin-left: 15px;  }
+ul ul li { list-style: none; margin-left: 10px; list-style-type: lower-alpha; list-style-position: inside }
+
+input, textarea {
+border : 1px solid #aaa;
+}
+input:hover, textarea:hover {
+border : 1px solid #888;
+}
+img {
+border : 0;
+float : left;
+margin-right : 10px;
+}
+a {
+color : #36be00;
+text-decoration : none;
+background : #fff;
+}
+a:hover {
+text-decoration : underline;
+}
+blockquote {
+margin : 0 0 15px 30px;
+border-left : 3px solid #8adf88;
+padding : 0 0 0 8px;
+}
+input, textarea {
+border : 1px solid #aaa;
+}
+input:hover, textarea:hover {
+border : 1px solid #888;
+}
+input.text {
+color : #000000;
+border : 1px solid #e6e6e6;
+background : inherit;
+}
+textarea.text {
+font-size : 8pt;
+border : 1px solid #e6e6e6;
+}
+input.text:hover, textarea.text:hover {
+border : 1px solid #d6d6d6;
+}
+form {
+display : inline;
+margin : 0;
+padding : 0;
+}
+.date {
+color : #aaa;
+font-weight : bold;
+background : transparent;
+}
+.green {
+color : #36be00;
+}
+.bigl {
+font-size : 1.2em;
+}
+.bold {
+font-weight : bold;
+}
+#header h1 {
+background : #fafafa;
+font-family : "Tahoma", Verdana, Arial, sans-serif;
+font-size : 3em;
+color : #585858;
+font-weight : normal;
+padding : 0;
+margin : 0;
+}
+#content {
+padding : 0;
+margin : 15px auto;
+width : 780px;
+background : #fafafa;
+}
+#header {
+margin : 0;
+padding : 0;
+width : 100%;
+background : inherit;
+color : #585858;
+height : 66px;
+}
+#header .slogan {
+color : #868686;
+margin : 0;
+padding : 0;
+background : #fafafa;
+font : bold 1em "Tahoma", Verdana, Arial, sans-serif;
+padding-left : 2px;
+}
+#header .topong {
+background : #fafafa url(images/topaff.jpg) no-repeat bottom;
+height : 66px;
+width : 159px;
+float : right;
+}
+#header .topong .pad {
+padding : 15px 5px 0 30px;
+}
+#header .topong .txt {
+padding : 0;
+color : #a5a5a5;
+}
+#header h4 {
+font : bold 1em "Tahoma", verdana, Arial;
+}
+#header h4 a {
+color : #585858;
+}
+#header h4 a:hover {
+text-decoration : none;
+}
+#menu {
+margin : 0 0;
+padding : 0;
+background : #4b7da7 url(images/menubg.gif) repeat-x top;
+color : #fff;
+width : 100%;
+height : 40px;
+}
+#menu .pad {
+padding-top : 12px;
+}
+#menu a, #menu a:visited {
+color : #fff;
+text-decoration : none;
+background : inherit;
+}
+#menu .submit {
+vertical-align : bottom;
+}
+#menu .submit ul {
+margin : 0;
+padding : 0 10px 0 0;
+list-style : none;
+}
+#menu .submit li {
+display : inline;
+margin : 0;
+padding : 0;
+}
+#menu .submit a {
+float : left;
+background : transparent;
+margin : 0;
+padding : 0 0 0 0;
+text-decoration : none;
+}
+#menu .submit a span {
+float : left;
+background : url(images/menusep.gif) no-repeat left;
+color : #fff;
+font-weight : bold;
+display : block;
+padding : 0 15px 0 15px;
+margin-right : 2px;
+}
+#menu .submit a span {
+float : none;
+}
+#menu #search {
+float : right;
+background : inherit;
+margin-top : 0;
+padding : 0;
+margin-right : 10px;
+margin-top : -4px;
+}
+#menu #search input.text {
+background : url(images/input.gif) no-repeat top;
+width : 110px;
+border : 0;
+padding : 2px 0 0 3px;
+}
+#menu #search input.txt {
+color : #fff;
+font-weight : bold;
+border : 0;
+background : transparent;
+cursor : pointer;
+}
+#modules {
+margin-top : 10px;
+height : 190px;
+}
+#modules #mod3 {
+background : #fafafa url(images/topgreybox.jpg) no-repeat top;
+height : 185px;
+width : 258px;
+float : right;
+margin-top : 5px;
+}
+#modules #mod2 {
+background : #fafafa url(images/topgreybox.jpg) no-repeat top;
+height : 185px;
+width : 258px;
+float : right;
+margin-right : 3px;
+margin-top : 5px;
+}
+#modules #mod1 {
+background : #fafafa url(images/topgreybox.jpg) no-repeat top;
+height : 185px;
+width : 258px;
+float : left;
+margin-top : 5px;
+}
+#modules .padding {
+padding : 13px 20px 10px 20px;
+}
+#modules img {
+border : 1px solid #d3d3d3;
+float : left;
+margin-bottom : 15px !important;
+margin-bottom : 5px;
+}
+#modules .price {
+color : #36be00;
+font : bold 2em "Tahoma", verdana, Arial;
+padding : 15px 35px 0 0;
+float : right;
+text-align : right;
+}
+#modules .only {
+color : #e5e5e5;
+font : bold 0.4em "Tahoma", verdana, Arial;
+}
+#modules .text {
+width : 100%;
+float : left;
+color : #9f9f9f;
+text-align : justify;
+}
+#modules h2 {
+font : bold 1.2em "Tahoma", verdana, Arial;
+color : #618fb5;
+background : transparent;
+margin-bottom : 4px;
+}
+#modules h2 a {
+color : #618fb5;
+background : transparent;
+}
+#modules h2 a:hover {
+text-decoration : none;
+color : #719fc5;
+}
+#maincontent {
+background : #fafafa;
+}
+#maincontent #graph {
+margin-top : 15px;
+background : #fafafa url(images/statgraph2.jpg) no-repeat left;
+width : 203px;
+height : 156px;
+float : left;
+}
+#maincontent p {
+margin-top : 10px;
+}
+#maincontent img {
+float : left;
+margin : 10px 10px 10px 0;
+}
+#maincontent .readm {
+color : #36be00;
+font-weight : bold;
+background : inherit;
+}
+#maincontent h2 {
+font : bold 1.6em "Tahoma", verdana, Arial;
+color : #585858;
+background : transparent;
+margin-bottom : 4px;
+border-bottom : 1px solid #e3eaef;
+}
+#maincontent #introduction {
+margin: 25px 0 40px 0;
+width : 100%;
+background : inherit;
+text-align : justify;
+color : #8e8e8e;
+}
+#maincontent #rightside {
+float : right;
+width : 220px;
+background : #f0f0f0;
+padding : 10px;
+margin : 0 0 10px 0;
+}
+#maincontent #rightside h2 {
+margin-bottom : 5px;
+}
+#maincontent #leftside {
+background : inherit;
+margin-right : 10px;
+width : 530px;
+}
+#maincontent #leftside .r {
+float : right;
+width : 250px;
+text-align : justify;
+margin-bottom : 15px;
+}
+#maincontent #leftside .le {
+width : 250px;
+text-align : justify;
+margin-bottom : 15px;
+}
+#maincontent #leftside .pad {
+padding : 15px 0 15px 0;
+text-align : justify;
+}
+#footer {
+bottom : 0;
+clear : both;
+text-align : left;
+border-top : 2px solid #e5e5e5;
+padding : 3px 0 0 0;
+margin-top : 5px;
+height : 50px;
+color : #888;
+background : inherit;
+}
+#footer .right {
+float : right;
+}
+
+</style>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

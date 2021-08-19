@@ -1,0 +1,163 @@
+ * {
+     box-sizing: border-box;
+ }
+ 
+ body {
+     font-family: 'Pontano Sans', sans-serif;
+     font-size: 1.125rem;
+     line-height: 1.5;
+     margin: 0;
+     padding: 0;
+     color: text;
+     background: white;
+     text-rendering: optimizeLegibility;
+ }
+ 
+ ul {
+     padding: 0;
+     margin: 0;
+     list-style: none;
+ }
+ 
+ a {
+     color: text;
+     text-decoration: none;
+     transition: all 0.2s ease;
+ }
+ 
+ h1,
+ h2,
+ h3,
+ h4 {
+     color: black;
+     font-weight: normal;
+     margin: 1.75rem 0 1rem 0;
+ }
+ 
+ h1 {
+     font-size: 2.5rem;
+ }
+ 
+ h2 {
+     font-size: 2.125rem;
+     margin: 0;
+ }
+ 
+ h3 {
+     font-size: 2rem;
+ }
+ 
+ h4 {
+     font-size: 1.5rem;
+     margin: 1rem 0 0.5rem 0;
+ }
+ 
+ section {
+     display: block;
+ }
+ 
+ img {
+     max-width: 100%;
+     max-height: 100%;
+     object-fit: cover;
+ }
+ 
+ nav {
+     display: block;
+ }
+ 
+ .toggle-nav {
+     display: flex;
+     justify-content: flex-end;
+     font-size: 1.125rem;
+     line-height: 1.7;
+     margin: 1rem 0;
+ }
+ 
+ #highlight {
+     color: black;
+     font-size: 1.125rem;
+     text-transform: uppercase;
+ }
+ 
+ .price {
+     margin: 0;
+ }
+ 
+ .breadcrumb-list {
+     display: flex;
+     flex-wrap: wrap;
+     padding: 0;
+     margin: 1rem 0 0 0;
+     list-style: none;
+ }
+ 
+ .description {
+     border-top: 0.0625rem solid gray;
+     margin: 2rem 0;
+     padding: 1rem 0 0 0;
+ }
+ 
+ .add-to-cart {
+     position: relative;
+     display: inline-block;
+     background: button;
+     color: white;
+     border: none;
+     border-radius: 0;
+     padding: 1.25rem 2.5rem;
+     font-size: 1rem;
+     text-transform: uppercase;
+     cursor: pointer;
+     transform: translateZ(0);
+     transition: color 0.3s ease;
+     letter-spacing: 0.0625rem;
+ }
+ 
+ .container {
+     margin: auto;
+     padding: 0 1rem;
+     max-width: 75rem;
+     width: 100%;
+ }
+ 
+ footer {
+     padding: 1rem 0;
+     text-align: center;
+ }
+ 
+ .product-image {
+     display: none;
+ }
+ 
+ @media (min-width: md) {
+     .product-image img,
+     .image-list img {
+         width: 100%;
+     }
+     .product-image {
+         display: block;
+     }
+     .image-list {
+         display: flex;
+         overflow: hidden;
+     }
+     nav ul {
+         justify-content: flex-end;
+     }
+     .toggle-nav {
+         display: none;
+     }
+     .flex-nav {
+         display: block;
+     }
+ }
+ 
+ @keyframes fadeImg {
+     from {
+         opacity: 0;
+     }
+     to {
+         opacity: 1;
+     }
+ }

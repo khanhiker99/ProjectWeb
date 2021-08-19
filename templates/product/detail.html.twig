@@ -1,0 +1,134 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Product Detail {% endblock %}
+
+{% block body %}
+<style>
+    body {
+        width: 80%;
+        margin: 20px auto;
+    }
+</style>
+    
+
+<nav class="flex-nav">
+  <div class="container">
+    <div class="grid menu">
+      <div class="column-xs-8 column-md-6">
+        <p id="highlight">Shopping Iker</p>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">        
+                <td scope="row"> 
+                    {% if product.picture == null %}
+                        <img src="{{ asset ('img/Toy/Gundam.png')}}" width="90%" height="90%"> 
+                    {% else %}    
+                        <img src="{{ asset ('img/Toy/' ~ product.picture)}}" width= "90%" height= "90%" />
+                    {% endif %}  
+                </td>         
+            </div>
+                <div class="col-sm-6">
+                    <h3 scope="row"> {{ product.name }} </h3>
+                    <h3 scope="row"> {{ product.information }} <a> $ </a> </h3>
+                    <div class="description">
+                        <div class="mt-3">
+                            <tr>              
+                                  <a scope="row" class="btn btn-outline-success" style="width: 120px" href="{{ path ('home_user' , {'id' : product.category.id })}} ">  {{ product.category.name }} </a>
+                              </tr>   
+                        </div>
+
+                         {# <td scope="row">
+                         <a href="{{ path ('category_detail', {'id' : product.category.id} ) }} "> 
+                                           {{ product.category.name }} 
+                         </a>
+                </td> #}
+                        
+                    </div>  
+
+                        <div class="mt-3"> 
+                            <td>
+                                <a class="btn btn-outline-info" style="width: 120px">Add To Cart</a>
+                            </td> 
+                        </div>
+
+                        <div class="mt-4">
+                            <td>
+                                <a class="btn btn-outline-secondary" style="width: 120px" href="{{ path ('product_index')}}">Back to list</a>
+                            </td>
+                        </div>
+
+                        <div class="mt-4">
+                            <td>
+                                <a class="btn btn-outline-dark"  href="{{ path ('home_user')}}">Back to home</a>
+                            </td>
+                        </div>
+
+                </div>
+        </div>
+    </div>
+</main>
+{# <footer>
+  <div class="grid">
+    <div class="column-xs-12">
+      <p class="copyright">&copy; Copyright 2018 <a href="https://katherinekato.com" title="Katherine Kato"  target="_blank">Katherine Kato</a></p>
+    </div>
+  </div>
+</footer> #}
+
+
+
+
+
+
+
+    
+
+
+
+
+
+    {# <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Picture</th>
+                <th scope="col">Category</th>            
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row"> {{ product.id }} </td>
+                <td scope="row"> {{ product.name }} </td>
+                <td scope="row"> {{ product.information }} </td>
+                <td scope="row"> 
+                    {% if product.picture == null %}
+                         <img src="{{ asset ('img/Toy/Gundam.png')}}" width="80px" height="120px"> 
+                    {% else %}    
+                         <img src="{{ asset ('img/Toy/' ~ product.picture)}}" width= "80px" height= "120px" />
+                    {% endif %}  
+                </td>
+                  <td scope="row">
+                         <a href="{{ path ('category_detail', {'id' : product.category.id} ) }} "> 
+                                           {{ product.category.name }} 
+                         </a>
+                </td>
+                <td>
+                    <a class="btn btn-warning" href="{{ path ('product_update', {'id' : product.id} )}}">Update</a>
+                    <a class="btn btn-danger" href="{{ path ('product_delete', {'id' : product.id} )}}"
+                                              onclick= "return confirm('Are you sure to delete ?')">
+                    Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table> #}
+</div>
+
+{% endblock %}
